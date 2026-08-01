@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Rating ❤️</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="hearts">
+        <span>❤️</span>
+        <span>💕</span>
+        <span>💖</span>
+        <span>💗</span>
+        <span>💞</span>
+        <span>❤️</span>
+        <span>💕</span>
+        <span>💖</span>
+    </div>
+
+    <div class="result-container">
+
+        <h1 class="result-title">Our Love Report 💘</h1>
+
+        <div class="score-box">
+            <div class="big-score">
+                <span id="scoreNum">0</span><span class="score-total"> / 10</span>
+            </div>
+            <div class="score-label">Your grade on the "How Much Do You Love Me?" quiz</div>
+        </div>
+
+        <div class="love-meter">
+            <div class="meter-label">
+                <span>Your love score</span>
+                <span id="gradePct">0%</span>
+            </div>
+            <div class="meter-bar">
+                <div class="meter-fill grade-fill" id="gradeFill"></div>
+            </div>
+
+            <div class="meter-label">
+                <span>My love for you</span>
+                <span>100%</span>
+            </div>
+            <div class="meter-bar">
+                <div class="meter-fill love-fill"></div>
+            </div>
+        </div>
+
+        <div class="rating-box">
+            <h2 id="ratingTitle">…</h2>
+            <p id="ratingMsg">…</p>
+        </div>
+
+        <div class="btn-group result-btns">
+            <button class="btn-no-outline" onclick="location.href='letter.html'">Read Your Letter 💌</button>
+            <button class="btn-no-outline" onclick="location.href='index.html'">Play Again 🔁</button>
+        </div>
+
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const score = parseInt(params.get('score') || '0', 10);
+        const total = 10;
+        const pct = Math.round((score / total) * 100);
+
+        document.getElementById('scoreNum').textContent = score;
+        document.getElementById('gradePct').textContent = pct + '%';
+
+        setTimeout(function () {
+            document.getElementById('gradeFill').style.width = pct + '%';
+        }, 300);
+
+        let title, msg;
+
+        if (score === total) {
+            title = "PERFECT SCORE! 💍";
+            msg = "10/10 — you love me as much as I love you: completely, fully, and without a doubt. Soulmates? Absolutely confirmed. I love you, Shorty. 💕";
+        } else if (score >= 8) {
+            title = "Almost Perfect! 😍";
+            msg = "You scored " + score + "/10 — you love me so much! But I know you love me even more than this… right? 😏💕";
+        } else if (score >= 6) {
+            title = "Pretty Good! 💖";
+            msg = "You scored " + score + "/10. That's a solid score, but I'm pretty sure your heart knows the real answer is 10/10. Let's pretend you got a perfect score anyway. 😉";
+        } else if (score >= 4) {
+            title = "Hmm… Suspicious 😅";
+            msg = "You scored " + score + "/10. Were you distracted by how cute I am? Because there's no way you love me any less than I love you. 💘";
+        } else {
+            title = "System Error 💻";
+            msg = "You scored " + score + "/10. Error: love levels critical! Restarting the game so we can fall in love all over again. 💞";
+        }
+
+        document.getElementById('ratingTitle').textContent = title;
+        document.getElementById('ratingMsg').textContent = msg;
+    </script>
+
+</body>
+</html>
+

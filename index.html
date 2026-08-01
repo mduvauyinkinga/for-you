@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Good Morning Shorty ❤️</title>
-<link rel="stylesheet" href="styles.css">
+    <title>Do You Want to Play a Game? ❤️</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -21,17 +21,39 @@
 
     <div class="container hero">
 
-        <h1>Good Morning<br>Mojo ❤️</h1>
+        <h1 class="game-title">Do you want to play a game? 🎮</h1>
 
         <p class="subtitle">
-            A little surprise to start your day ✨<br>
-            Just a little reminder that someone loves you very much 💕
+            A special little quiz about us…<br>
+            Just you, me, and 10 questions straight from my heart 💕
         </p>
 
-        <button onclick="location.href='letter.html'">
-            Click Me, Please Shorty 💌
-        </button>
+        <div class="btn-group">
+            <button class="btn-yes" onclick="location.href='quiz.html'">Yes 😍</button>
+            <button class="btn-no" id="noBtn">No 🙃</button>
+        </div>
+
+        <div class="error-msg" id="errorMsg">
+            ❌ Error 404: "No" not found.<br>
+            You can ONLY choose <strong>YES</strong> 💕
+        </div>
+
     </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const errorMsg = document.getElementById('errorMsg');
+
+        noBtn.addEventListener('click', function () {
+            errorMsg.classList.add('show');
+
+            // Restart the shake animation on every click
+            noBtn.classList.remove('shake');
+            void noBtn.offsetWidth;
+            noBtn.classList.add('shake');
+        });
+    </script>
 
 </body>
 </html>
+

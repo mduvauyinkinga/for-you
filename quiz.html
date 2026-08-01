@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Questions About Us ❤️</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="hearts">
+        <span>❤️</span>
+        <span>💕</span>
+        <span>💖</span>
+        <span>💗</span>
+        <span>💞</span>
+        <span>❤️</span>
+        <span>💕</span>
+        <span>💖</span>
+    </div>
+
+    <div class="quiz-container">
+
+        <div class="progress">
+            <span id="progressText">Question 1 / 10</span>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="quiz-card">
+            <h2 id="questionText"></h2>
+            <div class="btn-group quiz-btns">
+                <button class="btn-answer btn-true" id="trueBtn">True 💖</button>
+                <button class="btn-answer btn-false" id="falseBtn">False 💔</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const questions = [
+            { q: "Does my love make your heart feel at home?", a: true },
+            { q: "Do I ever make you feel sad or unloved?", a: false },
+            { q: "Do you love me with every beat of your heart?", a: true },
+            { q: "Do you believe I'd move mountains just to see you smile?", a: true },
+            { q: "Do you feel my love even on the days we're apart?", a: true },
+            { q: "Do you believe we're meant to make it through anything?", a: true },
+            { q: "Do you believe I might just be your soulmate?", a: true },
+            { q: "Do you believe we can heal every storm that comes our way?", a: true },
+            { q: "Do you trust me with your heart, completely and forever?", a: true },
+            { q: "Do you trust I'll spend forever making sure you're happy?", a: true }
+        ];
+
+        let current = 0;
+        let score = 0;
+
+        const questionEl = document.getElementById('questionText');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const trueBtn = document.getElementById('trueBtn');
+        const falseBtn = document.getElementById('falseBtn');
+
+        function loadQuestion() {
+            questionEl.textContent = questions[current].q;
+            progressText.textContent = 'Question ' + (current + 1) + ' / ' + questions.length;
+            progressFill.style.width = (current / questions.length) * 100 + '%';
+
+            trueBtn.disabled = false;
+            falseBtn.disabled = false;
+            trueBtn.classList.remove('correct', 'wrong', 'dimmed');
+            falseBtn.classList.remove('correct', 'wrong', 'dimmed');
+        }
+
+        function answer(userAnswer) {
+            const correct = questions[current].a;
+            const correctBtn = correct ? trueBtn : falseBtn;
+            const isRight = userAnswer === correct;
+
+            if (isRight) {
+                score++;
+                correctBtn.classList.add('correct');
+            } else {
+                const wrongBtn = userAnswer ? trueBtn : falseBtn;
+                correctBtn.classList.add('correct');
+                wrongBtn.classList.add('wrong', 'dimmed');
+            }
+
+            trueBtn.disabled = true;
+            falseBtn.disabled = true;
+
+            setTimeout(function () {
+                current++;
+                if (current < questions.length) {
+                    loadQuestion();
+                } else {
+                    window.location.href = 'result.html?score=' + score;
+                }
+            }, 1200);
+        }
+
+        trueBtn.addEventListener('click', function () { answer(true); });
+        falseBtn.addEventListener('click', function () { answer(false); });
+
+        loadQuestion();
+    </script>
+
+</body>
+</html>
+
