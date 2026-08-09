@@ -258,6 +258,18 @@ body{
     .letter{
         padding:25px;
     }
+
+    .container{
+        padding:16px;
+    }
+
+    .btn-group{
+        gap:14px;
+    }
+
+    .letter-container h1{
+        font-size:2.2rem;
+    }
 }
 
 /* ========================================
@@ -1160,9 +1172,260 @@ body{
         height:250px;
     }
 
-    .gift-grid{
+.gift-grid{
         grid-template-columns:repeat(3,1fr);
         gap:10px;
+    }
+}
+
+/* ========================================
+   SMALL PHONES (max-width:480px)
+======================================== */
+
+@media(max-width:480px){
+
+    .container{
+        padding:14px;
+    }
+
+    .hero .subtitle{
+        font-size:.95rem;
+        margin-bottom:30px;
+    }
+
+    .arcade-title{
+        font-size:1rem;
+        letter-spacing:1px;
+    }
+
+    .press-start{
+        font-size:.5rem;
+        letter-spacing:2px;
+    }
+
+    .queen-badge{
+        font-size:1.05rem;
+        margin-bottom:12px;
+    }
+
+    .wday-tag{
+        font-size:.95rem;
+    }
+
+    .btn-yes,
+    .btn-no,
+    .btn-no-outline{
+        padding:14px 28px;
+        font-size:1.05rem;
+    }
+
+    .btn-group{
+        gap:12px;
+    }
+
+    /* Letter */
+    .letter-container h1,
+    .game-title{
+        font-size:1.8rem;
+    }
+
+    .letter{
+        padding:20px;
+    }
+
+    .letter p{
+        font-size:1rem;
+    }
+
+    .letter .verse{
+        font-size:1.05rem;
+        padding:16px 18px;
+    }
+
+    /* Quiz */
+    .quiz-card{
+        padding:24px 16px;
+    }
+
+    .quiz-card h2{
+        font-size:1.2rem;
+        margin-bottom:25px;
+    }
+
+    .progress span{
+        font-size:1rem;
+    }
+
+    /* Result */
+    .result-title{
+        font-size:1.6rem;
+    }
+
+    .score-box,
+    .love-meter,
+    .rating-box{
+        padding:22px 18px;
+    }
+
+    .big-score{
+        font-size:2.4rem;
+    }
+
+    .rating-box h2{
+        font-size:1.5rem;
+    }
+
+    .rating-box p{
+        font-size:1rem;
+    }
+
+    /* Intro */
+    .intro-card{
+        padding:22px 16px;
+    }
+
+    .intro-title{
+        font-size:1.4rem;
+    }
+
+    .intro-text{
+        font-size:.98rem;
+    }
+
+    .chapter-tag{
+        font-size:.6rem;
+    }
+
+    .btn-next{
+        font-size:1rem;
+        padding:13px 26px;
+    }
+
+    /* Game page */
+    .game-page{
+        padding:20px 0;
+    }
+
+    .hud{
+        gap:12px;
+    }
+
+    .hud-item{
+        padding:8px 16px;
+        font-size:.9rem;
+    }
+
+    .hud-item b{
+        font-size:1.05rem;
+    }
+
+    .game-icon{
+        font-size:2.4rem;
+    }
+
+    .game-card{
+        padding:20px 14px;
+    }
+
+    .game-card h3{
+        font-size:1.1rem;
+    }
+
+    .game-card p{
+        font-size:.88rem;
+    }
+
+    /* Whack */
+    .board{
+        gap:10px;
+    }
+
+    .hole{
+        min-height:70px;
+    }
+
+    .target{
+        font-size:1.8rem;
+    }
+
+    /* Memory */
+    .memory-card{
+        font-size:1.3rem;
+    }
+
+    /* Catch */
+    .catch-area{
+        height:220px;
+    }
+
+    .falling{
+        font-size:1.5rem;
+    }
+
+    /* Gift */
+    .gift-box{
+        font-size:2rem;
+    }
+
+    .gift-message{
+        font-size:1.05rem;
+        padding:16px;
+    }
+}
+
+/* ========================================
+   VERY SMALL PHONES (max-width:360px)
+======================================== */
+
+@media(max-width:360px){
+
+    .arcade-title{
+        font-size:.9rem;
+    }
+
+    .result-title{
+        font-size:1.4rem;
+    }
+
+    .letter-container h1,
+    .game-title{
+        font-size:1.6rem;
+    }
+
+    .btn-yes,
+    .btn-no,
+    .btn-no-outline{
+        padding:12px 20px;
+        font-size:.95rem;
+    }
+
+    .btn-group{
+        gap:10px;
+    }
+
+    .hud-item{
+        padding:7px 12px;
+        font-size:.85rem;
+    }
+
+    .hud-item b{
+        font-size:1rem;
+    }
+
+    .memory-card{
+        font-size:1.1rem;
+    }
+
+    .gift-box{
+        font-size:1.7rem;
+    }
+
+    .hole{
+        min-height:58px;
+    }
+
+    .target{
+        font-size:1.5rem;
     }
 }
 

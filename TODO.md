@@ -22,3 +22,10 @@
 - [x] Wire index.html START to intro.html
 - [x] Add CSS for intro + game station + new games
 - [x] Manual verification of full flow
+
+## NEW: Mobile Styling Fix
+
+- [x] Add small-screen breakpoint (max-width:480px) to styles.css
+- [x] Add very-small-screen breakpoint (max-width:360px) to styles.css
+- [x] Tighten existing 768px rules (buttons, quiz-card h2, letter padding)
+- [x] Manual verification at mobile widths (no horizontal scroll, good fit)
