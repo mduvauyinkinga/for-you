@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;700&family=Press+Start+2P&display=swap');
 
 *{
     margin:0;
@@ -583,10 +583,586 @@ body{
         font-size:3.2rem;
     }
 
-    .btn-answer{
+.btn-answer{
         min-width:130px;
         padding:14px 22px;
         font-size:1.05rem;
+    }
+}
+
+/* ========================================
+   RETRO ARCADE + WOMEN'S DAY THEME
+======================================== */
+
+/* Women's Day gold accent for body */
+.hero, .quiz-container, .result-container, .letter-container{
+    position:relative;
+    z-index:2;
+}
+
+/* Arcade blinking title */
+.arcade-title{
+    font-family:'Press Start 2P',sans-serif;
+    font-size:2.2rem;
+    color:#ffe082;
+    text-shadow:
+        0 0 8px #fff,
+        0 0 20px #ff4f81,
+        0 0 40px #ff4f81;
+    line-height:1.6;
+    animation:blink 1.2s steps(2,start) infinite;
+    margin-bottom:20px;
+    letter-spacing:2px;
+}
+
+@keyframes blink{
+    0%,100%{opacity:1;}
+    50%{opacity:.7;}
+}
+
+/* Retro START prompt */
+.press-start{
+    font-family:'Press Start 2P',sans-serif;
+    font-size:.85rem;
+    color:#fff;
+    letter-spacing:3px;
+    margin-top:30px;
+    animation:blink 1.4s steps(2,start) infinite;
+}
+
+/* Women's Day tagline */
+.wday-tag{
+    font-size:1.2rem;
+    color:#fff;
+    font-weight:700;
+    margin-bottom:8px;
+    text-shadow:0 2px 8px rgba(255,105,180,.5);
+}
+
+/* Crown/queen badge */
+.queen-badge{
+    font-size:1.3rem;
+    color:#ffd700;
+    font-weight:700;
+    text-shadow:0 0 10px rgba(255,215,0,.6);
+    margin-bottom:15px;
+}
+
+/* Neon glow title override */
+.neon-title{
+    color:#ffe082;
+    text-shadow:
+        0 0 10px #fff,
+        0 0 20px #ff4f81,
+        0 0 40px #ff4f81;
+}
+
+/* ---------- COMBO STREAK ---------- */
+
+.combo-wrap{
+    min-height:34px;
+    margin-bottom:10px;
+}
+
+.combo{
+    display:inline-block;
+    font-family:'Press Start 2P',sans-serif;
+    font-size:.85rem;
+    color:#ffd700;
+    text-shadow:0 0 10px #ff4f81;
+    padding:8px 18px;
+    background:rgba(255,255,255,.2);
+    border:2px solid #ffd700;
+    border-radius:50px;
+    opacity:0;
+    transform:scale(.8);
+    transition:all .3s ease;
+}
+
+.combo.show{
+    opacity:1;
+    transform:scale(1);
+}
+
+.combo.big{
+    animation:comboPop .35s ease;
+}
+
+@keyframes comboPop{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.35);}
+    100%{transform:scale(1);}
+}
+
+/* Fragile life-bar style progress */
+.progress-fill.heart-bar{
+    background:linear-gradient(90deg,#ff4f81,#ffd700);
+    box-shadow:0 0 12px rgba(255,215,0,.6);
+}
+
+/* ---------- CONFETTI ---------- */
+
+.confetti{
+    position:fixed;
+    top:-20px;
+    width:12px;
+    height:12px;
+    z-index:10;
+    pointer-events:none;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:0;
+    }
+}
+
+/* ---------- VERSE (letter) ---------- */
+
+.letter .verse{
+    font-size:1.2rem;
+    font-style:italic;
+    color:#7a4a63;
+    background:linear-gradient(135deg,#fff0f5,#ffe4ec);
+    padding:20px 25px;
+    border-left:5px solid #ffd700;
+    border-radius:12px;
+    line-height:2;
+}
+
+.verse-ref{
+    display:block;
+    margin-top:10px;
+    font-style:normal;
+    font-weight:700;
+    color:#ff4f81;
+}
+
+/* Letter heading gold */
+.letter-container h1{
+    color:#ffe082;
+    text-shadow:
+        0 0 10px #fff,
+        0 0 20px #ff4f81,
+        0 0 40px #ff4f81;
+}
+
+/* ---------- RETRO MOBILE ---------- */
+
+@media(max-width:768px){
+
+    .arcade-title{
+        font-size:1.3rem;
+    }
+
+    .press-start{
+        font-size:.6rem;
+    }
+
+    .wday-tag{
+        font-size:1rem;
+    }
+
+.combo{
+        font-size:.65rem;
+    }
+}
+
+/* ========================================
+   VIDEO-GAME INTRO
+======================================== */
+
+.intro-container{
+    width:90%;
+    max-width:700px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    padding:30px 0;
+    position:relative;
+    z-index:2;
+}
+
+.intro-card{
+    background:rgba(255,255,255,.95);
+    border-radius:25px;
+    padding:40px 35px;
+    box-shadow:0 15px 35px rgba(255,105,180,.25);
+    text-align:center;
+}
+
+.chapter-tag{
+    font-family:'Press Start 2P',sans-serif;
+    font-size:.7rem;
+    color:#ff4f81;
+    letter-spacing:2px;
+    margin-bottom:20px;
+}
+
+.intro-title{
+    font-family:'Pacifico',cursive;
+    font-size:2.4rem;
+    color:#ff4f81;
+    margin-bottom:20px;
+}
+
+.intro-text{
+    font-size:1.2rem;
+    color:#555;
+    line-height:1.9;
+    margin-bottom:25px;
+}
+
+.verse-block{
+    background:linear-gradient(135deg,#fff0f5,#ffe4ec);
+    border-left:5px solid #ffd700;
+    border-radius:12px;
+    padding:20px 25px;
+    margin-bottom:25px;
+}
+
+.verse-text{
+    font-size:1.2rem;
+    font-style:italic;
+    color:#7a4a63;
+    line-height:2;
+}
+
+.btn-next{
+    font-family:'Quicksand',sans-serif;
+    font-size:1.2rem;
+    font-weight:700;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    padding:16px 40px;
+    background:#ff4f81;
+    color:white;
+    box-shadow:0 8px 20px rgba(255,79,129,.4);
+    transition:all .3s ease;
+}
+
+.btn-next:hover{
+    transform:translateY(-4px) scale(1.05);
+}
+
+.hidden{
+    display:none;
+}
+
+/* ========================================
+   GAME STATION
+======================================== */
+
+.station-container{
+    width:90%;
+    max-width:900px;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+    padding:35px 0;
+    position:relative;
+    z-index:2;
+}
+
+.game-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.game-card{
+    background:rgba(255,255,255,.95);
+    border-radius:20px;
+    padding:25px 20px;
+    box-shadow:0 10px 25px rgba(255,105,180,.2);
+    cursor:pointer;
+    transition:all .3s ease;
+    border:2px solid transparent;
+}
+
+.game-card:hover{
+    transform:translateY(-6px) scale(1.03);
+    border-color:#ffd700;
+    box-shadow:0 15px 35px rgba(255,105,180,.35);
+}
+
+.game-icon{
+    font-size:3rem;
+    margin-bottom:10px;
+}
+
+.game-card h3{
+    font-family:'Pacifico',cursive;
+    color:#ff4f81;
+    font-size:1.4rem;
+    margin-bottom:8px;
+}
+
+.game-card p{
+    color:#777;
+    font-size:.95rem;
+    line-height:1.5;
+}
+
+/* ========================================
+   GAME PAGES (shared)
+======================================== */
+
+.game-page{
+    width:90%;
+    max-width:750px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    padding:30px 0;
+    position:relative;
+    z-index:2;
+}
+
+.hud{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.hud-item{
+    background:rgba(255,255,255,.9);
+    color:#ff4f81;
+    font-weight:700;
+    padding:10px 20px;
+    border-radius:50px;
+    box-shadow:0 5px 15px rgba(255,105,180,.2);
+}
+
+.hud-item b{
+    font-size:1.2rem;
+}
+
+.game-nav{
+    margin-top:10px;
+}
+
+.hint{
+    color:white;
+    font-weight:600;
+    text-shadow:0 2px 8px rgba(255,105,180,.5);
+}
+
+/* Whack-a-Love */
+.board{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    max-width:420px;
+    margin:0 auto;
+    width:100%;
+}
+
+.hole{
+    aspect-ratio:1;
+    background:rgba(255,255,255,.85);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:inset 0 6px 15px rgba(0,0,0,.08);
+    cursor:pointer;
+    position:relative;
+    min-height:90px;
+}
+
+.target{
+    font-size:2.2rem;
+    animation:rise .4s ease;
+}
+
+.target.hit{
+    animation:hit .2s ease;
+}
+
+@keyframes rise{
+    from{transform:scale(0);}
+    to{transform:scale(1);}
+}
+
+@keyframes hit{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.4);opacity:.5;}
+    100%{transform:scale(0);opacity:0;}
+}
+
+/* Memory */
+.memory-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    max-width:420px;
+    margin:0 auto;
+    width:100%;
+}
+
+.memory-card{
+    aspect-ratio:1;
+    background:linear-gradient(135deg,#ff4f81,#ff8fb1);
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:2rem;
+    color:white;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(255,79,129,.3);
+    transition:all .3s ease;
+    user-select:none;
+}
+
+.memory-card.flipped{
+    background:white;
+    color:#ff4f81;
+    box-shadow:0 8px 20px rgba(0,0,0,.1);
+}
+
+.memory-card.matched{
+    background:#4caf50;
+    color:white;
+    cursor:default;
+}
+
+.memory-card:hover{
+    transform:scale(1.03);
+}
+
+/* Catch the Petals */
+.catch-area{
+    position:relative;
+    width:100%;
+    height:300px;
+    background:rgba(255,255,255,.85);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(255,105,180,.25);
+    cursor:none;
+    touch-action:none;
+}
+
+.basket{
+    position:absolute;
+    bottom:15px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:2.5rem;
+    transition:left .05s linear;
+    pointer-events:none;
+}
+
+.falling{
+    position:absolute;
+    top:-30px;
+    font-size:1.8rem;
+    animation:fallDown 2.5s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes fallDown{
+    to{transform:translateY(340px);}
+}
+
+/* Know Me */
+.knowme-card h2{
+    font-family:'Quicksand',sans-serif;
+    font-size:1.4rem;
+    color:#333;
+    min-height:auto;
+    padding:10px;
+}
+
+/* Gift */
+.gift-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    max-width:420px;
+    margin:0 auto;
+    width:100%;
+}
+
+.gift-box{
+    aspect-ratio:1;
+    background:linear-gradient(135deg,#ffd700,#ffb300);
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:2.5rem;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(255,179,0,.4);
+    transition:all .3s ease;
+}
+
+.gift-box.opened{
+    background:white;
+    box-shadow:0 8px 20px rgba(0,0,0,.1);
+    cursor:default;
+}
+
+.gift-box:hover{
+    transform:scale(1.05);
+}
+
+.gift-message{
+    background:rgba(255,255,255,.95);
+    color:#ff4f81;
+    font-weight:700;
+    font-size:1.2rem;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(255,105,180,.2);
+}
+
+/* Mobile for new pages */
+@media(max-width:768px){
+
+    .intro-card{
+        padding:25px 18px;
+    }
+
+    .intro-title{
+        font-size:1.7rem;
+    }
+
+    .intro-text{
+        font-size:1rem;
+    }
+
+    .btn-next{
+        font-size:1rem;
+        padding:14px 30px;
+    }
+
+    .game-card h3{
+        font-size:1.2rem;
+    }
+
+    .memory-grid{
+        grid-template-columns:repeat(4,1fr);
+        gap:8px;
+    }
+
+    .memory-card{
+        font-size:1.5rem;
+    }
+
+    .catch-area{
+        height:250px;
+    }
+
+    .gift-grid{
+        grid-template-columns:repeat(3,1fr);
+        gap:10px;
     }
 }
 

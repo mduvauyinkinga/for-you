@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know Me? 💞</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="hearts">
+        <span>🌸</span><span>💕</span><span>🌹</span><span>💗</span>
+        <span>💐</span><span>❤️</span><span>🌷</span><span>💖</span>
+    </div>
+
+    <div class="game-page">
+        <div class="queen-badge">👑 Know Me? 👑</div>
+        <h1 class="result-title neon-title">How Well Do You Know Me? 💞</h1>
+
+        <div class="hud">
+            <span class="hud-item">Score: <b id="score">0</b></span>
+            <span class="hud-item">Q: <b id="qnum">1</b>/5</span>
+        </div>
+
+        <div class="quiz-card knowme-card">
+            <h2 id="questionText"></h2>
+            <div class="btn-group quiz-btns">
+                <button class="btn-answer btn-true" id="optA"></button>
+                <button class="btn-answer btn-false" id="optB"></button>
+            </div>
+        </div>
+
+        <div class="btn-group result-btns game-nav">
+            <button class="btn-no-outline" onclick="location.href='games.html'">Back 🎮</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "What's my favorite way to spend time with you?", a: "Just being together", b: "Going out", correct: 0 },
+            { q: "What do I love most about you?", a: "Your heart & kindness", b: "I'm not sure", correct: 0 },
+            { q: "What makes me smile every day?", a: "Your laugh", b: "Pizza", correct: 0 },
+            { q: "What would I do for you?", a: "Move mountains", b: "Nothing", correct: 0 },
+            { q: "What are you to me?", a: "My Queen 👑", b: "Just a friend", correct: 0 }
+        ];
+
+        let current = 0;
+        let score = 0;
+
+        const questionEl = document.getElementById('questionText');
+        const optA = document.getElementById('optA');
+        const optB = document.getElementById('optB');
+        const scoreEl = document.getElementById('score');
+        const qnumEl = document.getElementById('qnum');
+
+        function load() {
+            const q = questions[current];
+            questionEl.textContent = q.q;
+            optA.textContent = 'A) ' + q.a;
+            optB.textContent = 'B) ' + q.b;
+            qnumEl.textContent = (current + 1) + '/5';
+            optA.disabled = false;
+            optB.disabled = false;
+            optA.classList.remove('correct', 'wrong');
+            optB.classList.remove('correct', 'wrong');
+        }
+
+        function pick(el, idx) {
+            const q = questions[current];
+            const correctEl = idx === q.correct ? optA : optB;
+            const wrongEl = idx === q.correct ? optB : optA;
+
+            if (idx === q.correct) {
+                score++;
+                correctEl.classList.add('correct');
+            } else {
+                correctEl.classList.add('correct');
+                wrongEl.classList.add('wrong');
+            }
+            scoreEl.textContent = score;
+            optA.disabled = true;
+            optB.disabled = true;
+
+            setTimeout(function () {
+                current++;
+                if (current < questions.length) {
+                    load();
+                } else {
+                    alert('You scored ' + score + '/5! You know me so well, Shorty! 💕');
+                    window.location.href = 'games.html';
+                }
+            }, 1200);
+        }
+
+        optA.addEventListener('click', function () { pick(optA, 0); });
+        optB.addEventListener('click', function () { pick(optB, 1); });
+
+        load();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1 — For You 💌</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="hearts">
+        <span>🌸</span>
+        <span>💕</span>
+        <span>🌹</span>
+        <span>💗</span>
+        <span>💐</span>
+        <span>❤️</span>
+        <span>🌷</span>
+        <span>💖</span>
+    </div>
+
+    <div class="intro-container">
+
+        <div class="queen-badge">👑 Queen of My Heart 👑</div>
+
+        <div class="intro-card">
+            <div class="chapter-tag" id="chapterTag">CHAPTER 1: FOR YOU</div>
+            <h1 class="intro-title" id="introTitle">A Message for You 💌</h1>
+            <p class="intro-text" id="introText"></p>
+            <div class="verse-block hidden" id="verseBlock">
+                <p class="verse-text">
+                    "A wife of noble character who can find?<br>
+                    She is worth far more than rubies…<br>
+                    She speaks with wisdom, and faithful instruction is on her tongue."
+                </p>
+                <p class="verse-ref">— Proverbs 31:10, 26</p>
+            </div>
+            <button class="btn-next" id="nextBtn">NEXT ▶</button>
+        </div>
+
+        <p class="press-start">PRESS NEXT TO CONTINUE →</p>
+
+    </div>
+
+    <script>
+        const chapterTag = document.getElementById('chapterTag');
+        const introTitle = document.getElementById('introTitle');
+        const introText = document.getElementById('introText');
+        const verseBlock = document.getElementById('verseBlock');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let step = 0;
+
+        const steps = [
+            {
+                tag: "CHAPTER 1: FOR YOU",
+                title: "A Message for You 💌",
+                text: "Today is all about celebrating the amazing woman you are — and I want you to know that you're celebrated by me every single day. Thank you for being the strong woman you are, Shorty. 💕"
+            },
+            {
+                tag: "CHAPTER 2: HIS WORD",
+                title: "A Verse for You 📖",
+                text: "This one's from the heart of God, for a woman of noble and loving character—just like you."
+            },
+            {
+                tag: "CHAPTER 3: THE QUEST",
+                title: "Time to Play! 🎮",
+                text: "Your journey isn't over yet, my Queen. Pick a game and let's have some fun together! 👑"
+            }
+        ];
+
+        function render() {
+            if (step === 1) {
+                // Show verse
+                verseBlock.classList.remove('hidden');
+                introText.classList.add('hidden');
+            } else {
+                verseBlock.classList.add('hidden');
+                introText.classList.remove('hidden');
+            }
+
+            chapterTag.textContent = steps[step].tag;
+            introTitle.textContent = steps[step].title;
+            introText.textContent = steps[step].text;
+
+            if (step === 2) {
+                nextBtn.textContent = "ENTER GAME STATION ▶";
+            } else {
+                nextBtn.textContent = "NEXT ▶";
+            }
+        }
+
+        nextBtn.addEventListener('click', function () {
+            step++;
+            if (step >= steps.length) {
+                window.location.href = 'games.html';
+                return;
+            }
+            render();
+        });
+
+        render();
+    </script>
+
+</body>
+</html>

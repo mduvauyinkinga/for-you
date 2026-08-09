@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Memory 💌</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="hearts">
+        <span>🌸</span><span>💕</span><span>🌹</span><span>💗</span>
+        <span>💐</span><span>❤️</span><span>🌷</span><span>💖</span>
+    </div>
+
+    <div class="game-page">
+        <div class="queen-badge">👑 Love Memory 👑</div>
+        <h1 class="result-title neon-title">Match the Pairs! 💌</h1>
+
+        <div class="hud">
+            <span class="hud-item">Moves: <b id="moves">0</b></span>
+            <span class="hud-item">Pairs: <b id="pairs">0</b>/6</span>
+        </div>
+
+        <div class="memory-grid" id="memoryGrid"></div>
+
+        <div class="btn-group result-btns game-nav">
+            <button class="btn-no-outline" onclick="location.href='games.html'">Back 🎮</button>
+            <button class="btn-no-outline" id="resetBtn">Play Again 🔁</button>
+        </div>
+    </div>
+
+    <script>
+        const grid = document.getElementById('memoryGrid');
+        const movesEl = document.getElementById('moves');
+        const pairsEl = document.getElementById('pairs');
+        const resetBtn = document.getElementById('resetBtn');
+
+        const symbols = ['❤️', '💖', '🌸', '🌹', '💐', '💗'];
+        let cards = [];
+        let moves = 0;
+        let matched = 0;
+        let first = null;
+        let lock = false;
+
+        function shuffle(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function build() {
+            moves = 0;
+            matched = 0;
+            first = null;
+            lock = false;
+            movesEl.textContent = '0';
+            pairsEl.textContent = '0/6';
+            grid.innerHTML = '';
+
+            cards = shuffle(symbols.concat(symbols));
+            cards.forEach(function (icon, i) {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.dataset.icon = icon;
+                card.dataset.index = i;
+                card.textContent = '?';
+                card.addEventListener('click', function () { flip(card); });
+                grid.appendChild(card);
+            });
+        }
+
+        function flip(card) {
+            if (lock || card.classList.contains('matched') || card.classList.contains('flipped')) return;
+            card.classList.add('flipped');
+            card.textContent = card.dataset.icon;
+
+            if (!first) {
+                first = card;
+                return;
+            }
+
+            // second card
+            moves++;
+            movesEl.textContent = moves;
+            lock = true;
+
+            if (first.dataset.icon === card.dataset.icon) {
+                first.classList.add('matched');
+                card.classList.add('matched');
+                matched++;
+                pairsEl.textContent = matched + '/6';
+                first = null;
+                lock = false;
+                if (matched === 6) {
+                    setTimeout(function () {
+                        alert('You matched them all! You\'re amazing, Shorty! 💕');
+                        burstBig();
+                    }, 400);
+                }
+            } else {
+                const a = first;
+                setTimeout(function () {
+                    a.classList.remove('flipped');
+                    a.textContent = '?';
+                    card.classList.remove('flipped');
+                    card.textContent = '?';
+                    first = null;
+                    lock = false;
+                }, 800);
+            }
+        }
+
+        function burstBig() {
+            const colors = ['#ff4f81', '#ffd700', '#ff8fb1', '#fff', '#ff6b6b'];
+            for (let i = 0; i < 30; i++) {
+                setTimeout(function () {
+                    const piece = document.createElement('span');
+                    piece.className = 'confetti';
+                    piece.style.left = Math.random() * 100 + 'vw';
+                    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    piece.style.animationDuration = (1 + Math.random() * 1.5) + 's';
+                    document.body.appendChild(piece);
+                    setTimeout(function () { piece.remove(); }, 2800);
+                }, Math.random() * 600);
+            }
+        }
+
+        resetBtn.addEventListener('click', build);
+        build();
+    </script>
+
+</body>
+</html>

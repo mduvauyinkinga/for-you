@@ -9,19 +9,21 @@
 <body>
 
     <div class="hearts">
-        <span>❤️</span>
+        <span>🌸</span>
         <span>💕</span>
-        <span>💖</span>
+        <span>🌹</span>
         <span>💗</span>
         <span>💞</span>
         <span>❤️</span>
-        <span>💕</span>
+        <span>🌷</span>
         <span>💖</span>
     </div>
 
     <div class="result-container">
 
-        <h1 class="result-title">Our Love Report 💘</h1>
+        <div class="queen-badge">👑 LEVEL UP 👑</div>
+
+        <h1 class="result-title neon-title">Our Love Report 💘</h1>
 
         <div class="score-box">
             <div class="big-score">
@@ -77,10 +79,10 @@
 
         if (score === total) {
             title = "PERFECT SCORE! 💍";
-            msg = "10/10 — you love me as much as I love you: completely, fully, and without a doubt. Soulmates? Absolutely confirmed. I love you, Shorty. 💕";
+            msg = "Thank You for being the strong woman you are, Shorty. 💕 10/10 — you love me as much as I love you: completely, fully, and without a doubt. Soulmates? Absolutely confirmed. Happy Women's Day, my Queen. 👑";
         } else if (score >= 8) {
             title = "Almost Perfect! 😍";
-            msg = "You scored " + score + "/10 — you love me so much! But I know you love me even more than this… right? 😏💕";
+            msg = "You scored " + score + "/10 — you love me so much! And I already know you're a strong, amazing woman. Thank You for being the strong woman you are, Shorty. 💕";
         } else if (score >= 6) {
             title = "Pretty Good! 💖";
             msg = "You scored " + score + "/10. That's a solid score, but I'm pretty sure your heart knows the real answer is 10/10. Let's pretend you got a perfect score anyway. 😉";
@@ -94,8 +96,24 @@
 
         document.getElementById('ratingTitle').textContent = title;
         document.getElementById('ratingMsg').textContent = msg;
+
+        // Confetti celebration on a winning score
+        if (score >= 8) {
+            const colors = ['#ff4f81', '#ffd700', '#ff8fb1', '#fff', '#ff6b6b'];
+            for (let i = 0; i < 40; i++) {
+                setTimeout(function () {
+                    const piece = document.createElement('span');
+                    piece.className = 'confetti';
+                    piece.style.left = Math.random() * 100 + 'vw';
+                    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    piece.style.animationDuration = (1 + Math.random() * 1.5) + 's';
+                    piece.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                    document.body.appendChild(piece);
+                    setTimeout(function () { piece.remove(); }, 2800);
+                }, Math.random() * 800);
+            }
+        }
     </script>
 
 </body>
 </html>
-

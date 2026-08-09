@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack-a-Love 🔨</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="hearts">
+        <span>🌸</span><span>💕</span><span>🌹</span><span>💗</span>
+        <span>💐</span><span>❤️</span><span>🌷</span><span>💖</span>
+    </div>
+
+    <div class="game-page">
+        <div class="queen-badge">👑 Whack-a-Love 👑</div>
+        <h1 class="result-title neon-title">Tap the Love! 🔨</h1>
+
+        <div class="hud">
+            <span class="hud-item">Score: <b id="score">0</b></span>
+            <span class="hud-item">Time: <b id="time">30</b>s</span>
+        </div>
+
+        <div class="board" id="board"></div>
+
+        <div class="btn-group result-btns game-nav">
+            <button class="btn-no-outline" onclick="location.href='games.html'">Back 🎮</button>
+            <button class="btn-no-outline" id="resetBtn">Play Again 🔁</button>
+        </div>
+    </div>
+
+    <script>
+        const board = document.getElementById('board');
+        const scoreEl = document.getElementById('score');
+        const timeEl = document.getElementById('time');
+        const resetBtn = document.getElementById('resetBtn');
+
+        let score = 0;
+        let time = 30;
+        let timer = null;
+        let popTimer = null;
+        let running = false;
+
+        const symbols = ['❤️', '💖', '🌸', '🌹', '💐', '💗', '🌷', '💕'];
+
+        function startGame() {
+            score = 0;
+            time = 30;
+            scoreEl.textContent = '0';
+            timeEl.textContent = '30';
+            board.innerHTML = '';
+            running = true;
+
+            for (let i = 0; i < 9; i++) {
+                const hole = document.createElement('div');
+                hole.className = 'hole';
+                hole.addEventListener('click', function () {
+                    const target = hole.querySelector('.target');
+                    if (target) {
+                        score += 10;
+                        scoreEl.textContent = score;
+                        target.classList.add('hit');
+                        setTimeout(function () { target.remove(); }, 200);
+                        burstSmall();
+                    }
+                });
+                board.appendChild(hole);
+            }
+
+            timer = setInterval(function () {
+                time--;
+                timeEl.textContent = time;
+                if (time <= 0) {
+                    clearInterval(timer);
+                    clearInterval(popTimer);
+                    running = false;
+                    board.querySelectorAll('.target').forEach(function (t) { t.remove(); });
+                    alert('Time\'s up! Your score: ' + score + ' 💕');
+                }
+            }, 1000);
+
+            popTimer = setInterval(popTarget, 400);
+        }
+
+        function popTarget() {
+            if (!running) return;
+            const holes = board.children;
+            const hole = holes[Math.floor(Math.random() * holes.length)];
+            if (hole.querySelector('.target')) return;
+
+            const target = document.createElement('span');
+            target.className = 'target';
+            target.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            hole.appendChild(target);
+            setTimeout(function () {
+                if (target.parentNode) target.remove();
+            }, 900);
+        }
+
+        function burstSmall() {
+            const colors = ['#ff4f81', '#ffd700', '#ff8fb1', '#fff'];
+            for (let i = 0; i < 8; i++) {
+                const piece = document.createElement('span');
+                piece.className = 'confetti';
+                piece.style.left = Math.random() * 100 + 'vw';
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.animationDuration = '0.8s';
+                document.body.appendChild(piece);
+                setTimeout(function () { piece.remove(); }, 1000);
+            }
+        }
+
+        resetBtn.addEventListener('click', function () {
+            clearInterval(timer);
+            clearInterval(popTimer);
+            startGame();
+        });
+
+        startGame();
+    </script>
+
+</body>
+</html>

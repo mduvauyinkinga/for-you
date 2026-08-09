@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch the Petals 🌹</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="hearts">
+        <span>🌸</span><span>💕</span><span>🌹</span><span>💗</span>
+        <span>💐</span><span>❤️</span><span>🌷</span><span>💖</span>
+    </div>
+
+    <div class="game-page">
+        <div class="queen-badge">👑 Catch the Petals 👑</div>
+        <h1 class="result-title neon-title">Catch the Love! 🌹</h1>
+
+        <div class="hud">
+            <span class="hud-item">Score: <b id="score">0</b></span>
+            <span class="hud-item">Time: <b id="time">30</b>s</span>
+        </div>
+
+        <div class="catch-area" id="catchArea">
+            <div class="basket" id="basket">🧺</div>
+        </div>
+
+        <p class="hint">Move your mouse / finger to catch the love! ⬅️➡️</p>
+
+        <div class="btn-group result-btns game-nav">
+            <button class="btn-no-outline" onclick="location.href='games.html'">Back 🎮</button>
+            <button class="btn-no-outline" id="resetBtn">Play Again 🔁</button>
+        </div>
+    </div>
+
+    <script>
+        const area = document.getElementById('catchArea');
+        const basket = document.getElementById('basket');
+        const scoreEl = document.getElementById('score');
+        const timeEl = document.getElementById('time');
+        const resetBtn = document.getElementById('resetBtn');
+
+        const good = ['🌸', '🌹', '💐', '❤️', '💖', '🌷'];
+        const bad = ['☁️', '🌧️'];
+
+        let score = 0;
+        let time = 30;
+        let timer = null;
+        let spawnTimer = null;
+        let running = false;
+
+        function moveBasket(e) {
+            const rect = area.getBoundingClientRect();
+            let x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+            x = Math.max(20, Math.min(rect.width - 60, x));
+            basket.style.left = x + 'px';
+        }
+
+        function startGame() {
+            score = 0;
+            time = 30;
+            scoreEl.textContent = '0';
+            timeEl.textContent = '30';
+            area.querySelectorAll('.falling').forEach(function (f) { f.remove(); });
+            running = true;
+
+            timer = setInterval(function () {
+                time--;
+                timeEl.textContent = time;
+                if (time <= 0) {
+                    clearInterval(timer);
+                    clearInterval(spawnTimer);
+                    running = false;
+                    area.querySelectorAll('.falling').forEach(function (f) { f.remove(); });
+                    alert('Time\'s up! You caught ' + score + ' pieces of love! 💕');
+                }
+            }, 1000);
+
+            spawnTimer = setInterval(spawnItem, 500);
+        }
+
+        function spawnItem() {
+            if (!running) return;
+            const rect = area.getBoundingClientRect();
+            const item = document.createElement('span');
+            const isBad = Math.random() < 0.2;
+            item.className = 'falling';
+            item.textContent = isBad ? bad[Math.floor(Math.random() * bad.length)] : good[Math.floor(Math.random() * good.length)];
+            item.style.left = Math.random() * 90 + '%';
+            item.dataset.bad = isBad ? '1' : '0';
+            item.addEventListener('animationend', function () { item.remove(); });
+            area.appendChild(item);
+        }
+
+        function checkCatch() {
+            if (!running) return;
+            const rect = area.getBoundingClientRect();
+            const basketLeft = basket.offsetLeft + 30;
+            const basketRight = basketLeft + 60;
+            const basketTop = basket.offsetTop + 20;
+
+            area.querySelectorAll('.falling').forEach(function (item) {
+                const itemLeft = item.offsetLeft + 15;
+                const itemTop = item.offsetTop + 15;
+                if (itemTop > basketTop && itemLeft > basketLeft - 20 && itemLeft < basketRight + 20) {
+                    if (item.dataset.bad === '1') {
+                        score = Math.max(0, score - 5);
+                    } else {
+                        score += 5;
+                    }
+                    scoreEl.textContent = score;
+                    item.remove();
+                }
+            });
+        }
+
+        area.addEventListener('mousemove', function (e) { moveBasket(e); checkCatch(); });
+        area.addEventListener('touchmove', function (e) { e.preventDefault(); moveBasket(e); checkCatch(); });
+
+        resetBtn.addEventListener('click', function () {
+            clearInterval(timer);
+            clearInterval(spawnTimer);
+            startGame();
+        });
+
+        startGame();
+    </script>
+
+</body>
+</html>

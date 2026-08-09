@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift For You 🎁</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="hearts">
+        <span>🌸</span><span>💕</span><span>🌹</span><span>💗</span>
+        <span>💐</span><span>❤️</span><span>🌷</span><span>💖</span>
+    </div>
+
+    <div class="game-page">
+        <div class="queen-badge">👑 Gift For You 👑</div>
+        <h1 class="result-title neon-title">Unwrap Your Gifts! 🎁</h1>
+        <p class="wday-tag">Tap each gift to unwrap a surprise!</p>
+
+        <div class="gift-grid" id="giftGrid"></div>
+
+        <div class="gift-message hidden" id="giftMessage"></div>
+
+        <div class="btn-group result-btns game-nav">
+            <button class="btn-no-outline" onclick="location.href='games.html'">Back 🎮</button>
+            <button class="btn-no-outline" id="resetBtn">Play Again 🔁</button>
+        </div>
+    </div>
+
+    <script>
+        const grid = document.getElementById('giftGrid');
+        const resetBtn = document.getElementById('resetBtn');
+        const messageEl = document.getElementById('giftMessage');
+
+        const gifts = [
+            { icon: '💖', msg: 'You are my whole heart! 💕' },
+            { icon: '🌸', msg: 'You are beautiful inside and out! 🌷' },
+            { icon: '👑', msg: 'You are the Queen of my heart! 👑' },
+            { icon: '💐', msg: 'A bouquet of love, just for you! 💐' },
+            { icon: '🌹', msg: 'A rose for my one and only! 🌹' },
+            { icon: '💍', msg: 'My forever person. I love you! 💍' }
+        ];
+
+        let opened = 0;
+
+        function build() {
+            opened = 0;
+            messageEl.classList.add('hidden');
+            messageEl.textContent = '';
+            grid.innerHTML = '';
+
+            gifts.forEach(function (gift, i) {
+                const box = document.createElement('div');
+                box.className = 'gift-box';
+                box.textContent = '🎁';
+                box.addEventListener('click', function () {
+                    if (box.classList.contains('opened')) return;
+                    box.classList.add('opened');
+                    box.textContent = gift.icon;
+                    opened++;
+                    messageEl.textContent = gift.msg;
+                    messageEl.classList.remove('hidden');
+                    burstSmall();
+                    if (opened === gifts.length) {
+                        setTimeout(function () {
+                            alert('You unwrapped all your gifts! Happy Women\'s Day, my love! 💐');
+                            burstBig();
+                        }, 600);
+                    }
+                });
+                grid.appendChild(box);
+            });
+        }
+
+        function burstSmall() {
+            const colors = ['#ff4f81', '#ffd700', '#ff8fb1', '#fff'];
+            for (let i = 0; i < 10; i++) {
+                const piece = document.createElement('span');
+                piece.className = 'confetti';
+                piece.style.left = Math.random() * 100 + 'vw';
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.animationDuration = '0.9s';
+                document.body.appendChild(piece);
+                setTimeout(function () { piece.remove(); }, 1200);
+            }
+        }
+
+        function burstBig() {
+            const colors = ['#ff4f81', '#ffd700', '#ff8fb1', '#fff', '#ff6b6b'];
+            for (let i = 0; i < 30; i++) {
+                setTimeout(function () {
+                    const piece = document.createElement('span');
+                    piece.className = 'confetti';
+                    piece.style.left = Math.random() * 100 + 'vw';
+                    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    piece.style.animationDuration = (1 + Math.random() * 1.5) + 's';
+                    document.body.appendChild(piece);
+                    setTimeout(function () { piece.remove(); }, 2800);
+                }, Math.random() * 500);
+            }
+        }
+
+        resetBtn.addEventListener('click', build);
+        build();
+    </script>
+
+</body>
+</html>
